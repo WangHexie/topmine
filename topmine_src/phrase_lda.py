@@ -165,6 +165,7 @@ class PhraseLDA(object):
                     document_phrase_topic = self.documents_phrases_topic[document_index][phrase_index]
 
                     # reduce counts for sampling
+                    phrase = list(phrase)
                     self.n_t[document_phrase_topic] -= len(phrase)
                     self.n_d_t_phrases[document_index][document_phrase_topic] -= 1
                     self.n_d_t_words[document_index][document_phrase_topic] -= len(phrase)
