@@ -2,7 +2,7 @@
 CITATION: The following code is a python implementation of some of the functions
 taken from https://github.com/mimno/Mallet
 """
-from __future__ import division
+
 import sys, math
 EULER_MASCHERONI = -0.5772156649015328606065121
 PI_SQUARED_OVER_SIX = math.pi * math.pi / 6
@@ -117,7 +117,7 @@ def learn_params(parameters, observations, observationLengths, shape, scale, num
 
         i = 1
         while i < len(observationLengths):
-            currentDigamma += 1 / (parametersSum + i - 1) if (parametersSum + i - 1) != 0 else 0
+            currentDigamma += 1 / (parametersSum + i - 1)
             denominator += observationLengths[i] * currentDigamma
             i += 1
 

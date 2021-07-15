@@ -1,7 +1,7 @@
-from __future__ import division
-import dirichlet
+
+from . import dirichlet
 import random
-import utils
+from . import utils
 import math
 from collections import Counter
 
@@ -107,7 +107,6 @@ class PhraseLDA(object):
                 document_phrases_topic.append(document_phrase_topic)
                 
                 # Increase counts
-                phrase = list(phrase)
                 self.n_t[document_phrase_topic] += len(phrase)
                 self.n_d_t_phrases[document_index][document_phrase_topic] += 1
                 self.n_d_t_words[document_index][document_phrase_topic] += len(phrase)
@@ -148,7 +147,7 @@ class PhraseLDA(object):
 
     def _should_optimize(self, iterations):
         if self.optimization_iterations is None:
-            return False
+            return false
         iterations_condition = ((iterations+1) % self.optimization_iterations) == 0
         burnin_condition = ((iterations+1) > self.optimization_burnin)
         return iterations_condition and burnin_condition
@@ -165,7 +164,6 @@ class PhraseLDA(object):
                     document_phrase_topic = self.documents_phrases_topic[document_index][phrase_index]
 
                     # reduce counts for sampling
-                    phrase = list(phrase)
                     self.n_t[document_phrase_topic] -= len(phrase)
                     self.n_d_t_phrases[document_index][document_phrase_topic] -= 1
                     self.n_d_t_words[document_index][document_phrase_topic] -= len(phrase)

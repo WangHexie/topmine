@@ -1,6 +1,6 @@
-import phrase_mining
+from . import phrase_mining
 import sys
-import utils
+from . import utils
 
 arguments = sys.argv
 print('Running Phrase Mining...')

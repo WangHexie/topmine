@@ -15,7 +15,7 @@ def load_partitioned_docs(path="intermediate_output/partitioneddocs.txt"):
         phrases = line.split(", ")
         partitioned_doc = []
         for phrase in phrases:
-            phrase_of_words = map(int,phrase.split(" "))
+            phrase_of_words = list(map(int,phrase.split(" ")))
             partitioned_doc.append(phrase_of_words)
         partitioned_docs.append(partitioned_doc)
     return partitioned_docs

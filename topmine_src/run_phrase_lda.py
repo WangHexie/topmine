@@ -1,6 +1,6 @@
-import phrase_lda
+from . import phrase_lda
 import sys
-import utils
+from . import utils
 
 arguments = sys.argv
 
