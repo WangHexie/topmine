@@ -117,7 +117,7 @@ def learn_params(parameters, observations, observationLengths, shape, scale, num
 
         i = 1
         while i < len(observationLengths):
-            currentDigamma += 1 / (parametersSum + i - 1)
+            currentDigamma += 1 / (parametersSum + i - 1) if (parametersSum + i - 1) != 0 else 0
             denominator += observationLengths[i] * currentDigamma
             i += 1
 
