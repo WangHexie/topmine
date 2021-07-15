@@ -3,7 +3,7 @@ import sys
 import utils
 
 arguments = sys.argv
-print 'Running Phrase Mining...'
+print('Running Phrase Mining...')
 
 file_name = arguments[1]
 

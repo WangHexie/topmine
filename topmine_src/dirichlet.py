@@ -145,7 +145,7 @@ def learn_params(parameters, observations, observationLengths, shape, scale, num
             k += 1
         iteration += 1
     if parametersSum < 0.0:
-        print parametersSum
+        print(parametersSum)
         print("sum not valid")
         sys.exit(1)
     return parametersSum

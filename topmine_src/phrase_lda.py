@@ -147,7 +147,7 @@ class PhraseLDA(object):
 
     def _should_optimize(self, iterations):
         if self.optimization_iterations is None:
-            return false
+            return False
         iterations_condition = ((iterations+1) % self.optimization_iterations) == 0
         burnin_condition = ((iterations+1) > self.optimization_burnin)
         return iterations_condition and burnin_condition
@@ -157,7 +157,7 @@ class PhraseLDA(object):
         self._initialize()        
         for iteration in range(self.iterations):
             if iteration % 100 == 0:
-                print "iteration", iteration
+                print("iteration", iteration)
 
             for document_index, document in enumerate(self.documents):
                 for phrase_index, phrase in enumerate(document):
@@ -239,12 +239,12 @@ class PhraseLDA(object):
         topic_index = 0
         for topic in topics:
             output_for_topic = []
-            print "topic", topic_index
+            print("topic", topic_index)
             for phrase, count in topic.most_common():
                 if len(phrase.split(" ")) > 1:
                     val = utils._get_string_phrase(phrase, self.index_vocab), count
                     output_for_topic.append(val)
-                    print val
+                    print(val)
             output.append(output_for_topic)
             topic_index += 1
         return output

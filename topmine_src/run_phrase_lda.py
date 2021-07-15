@@ -11,7 +11,7 @@ alpha = 4
 optimization_iterations = 50
 beta = 0.01
 
-print 'Running PhraseLDA...'
+print('Running PhraseLDA...')
 
 partitioned_docs = utils.load_partitioned_docs()
 vocab_file = utils.load_vocab()
