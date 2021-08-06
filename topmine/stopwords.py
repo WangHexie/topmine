@@ -1,4 +1,4 @@
-a
+stopwords = """a
 able
 about
 above
@@ -522,3 +522,4 @@ yourself
 yourselves
 z
 zero
+""".split()

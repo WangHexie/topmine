@@ -4,6 +4,8 @@ from collections import Counter
 import math
 import heapq
 import sys
+import pathlib
+import os
 
 class PhraseMining(object):
     """
@@ -20,14 +22,14 @@ class PhraseMining(object):
         threshold for the significance score.
     """
 
-    def __init__(self, file_name, min_support=10, max_phrase_size=40, alpha=4):
+    def __init__(self, documents, min_support=10, max_phrase_size=40, alpha=4):
         self.min_support = min_support
         self.max_phrase_size = max_phrase_size
         self.alpha = alpha
-        self.file_name = file_name
+        self.documents = documents
 
     def mine(self):
-        return self._run_phrase_mining(self.min_support, self.max_phrase_size, self.alpha, self.file_name)
+        return self._run_phrase_mining(self.min_support, self.max_phrase_size, self.alpha, self.documents)
 
     def _frequentPatternMining(self, documents, min_support, max_phrase_size, word_freq, active_indices):
         """
@@ -178,11 +180,8 @@ class PhraseMining(object):
         """
         Returns a list of stopwords.
         """
-        f = open("topmine_src/stopwords.txt")
-        stopwords = set()
-        for line in f:
-            stopwords.add(line.rstrip())
-        return stopwords
+        from .stopwords import stopwords
+        return set(stopwords)
 
     def _get_word_freq(self, documents):
         """
@@ -237,16 +236,15 @@ class PhraseMining(object):
                 document_of_phrases.append(phrases_of_words)
             self.partitioned_docs.append(document_of_phrases)
 
-    def _preprocess_input(self, filename, stopwords):
+    def _preprocess_input(self, original_documents, stopwords):
         """
         Performs preprocessing on the input document. Includes stopword removal.
         """
-        f = open(filename, 'r')
         documents = []
         document_range = []
         i = 0
         num_docs = 0
-        for line in f:
+        for line in original_documents:
             line_lowercase = line.lower()
             sentences_no_punc = re.split(r"[.,;!?]",line_lowercase)
             stripped_sentences = []
@@ -269,7 +267,7 @@ class PhraseMining(object):
 
         return documents, document_range, num_docs
 
-    def _run_phrase_mining(self, min_support, max_phrase_size, alpha, file_name):
+    def _run_phrase_mining(self, min_support, max_phrase_size, alpha, documents):
         """
         Runs the phrase mining algorithm.
 
@@ -282,7 +280,7 @@ class PhraseMining(object):
 
         stopwords = self._get_stopwords()
 
-        documents, document_range, num_docs = self._preprocess_input(file_name, stopwords)
+        documents, document_range, num_docs = self._preprocess_input(documents, stopwords)
 
         #calculate frequency of all words
         total_words, word_freq, active_indices = self._get_word_freq(documents)
